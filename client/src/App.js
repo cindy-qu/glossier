@@ -7,6 +7,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Skincare from './components/Collections/Skincare/Skincare'
 import Balm from './components/Collections/Skincare/Balms/Balm'
+import BalmCard from './components/Collections/Skincare/Balms/BalmCard'
 
 function App() {
   const [errors, setErrors] = useState([])
@@ -53,7 +54,8 @@ console.log(balmErrors)
         <Route path="/" element={<Home collectionCategories={ collectionCategories } setUpdateAfterCollection={ setUpdateAfterCollection } handleSkincareCard={ handleSkincareCard }/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/items/skincare/" element={<Skincare />} />
-        <Route path="/items/skincare/balms" element={<Balm />} />
+        <Route path="/items/skincare/balms" element={<Balm collectionCategories={ collectionCategories }/>} />
+        <Route path="/items/skincare/balms/:id" element={<BalmCard/>} />
       </Routes>
     </div>
   );

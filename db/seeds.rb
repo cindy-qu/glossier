@@ -32,6 +32,7 @@ end
 
 CSV.foreach(Rails.root.join('lib/tasks/seed_csv/category.csv'), headers:true) do |row|
     ItemCategory.create({
-        item_type: row[0]
+        item_type: row[0],
+        category_image: row[1]
     })
 end
