@@ -28,7 +28,7 @@ function App() {
     })
     
   },[updateAfterCollection])
-  console.log(errors)
+  // console.log(errors)
 
 
   
@@ -43,7 +43,18 @@ function App() {
       }
     }, [])
     
-console.log(balmErrors)
+// console.log(balmErrors)
+}
+
+const [individualBalm, setIndividualBalm] = useState([])
+const handleBalmCard = (e) => {
+  fetch(`/items/${e.target.id}`).then ((res) => {
+    if (res.ok) {
+      navigate(`/items/skincare/balms/${e.target.id}/`)
+      res.json().then(setIndividualBalm)
+    } 
+  }, [])
+
 }
 
 
@@ -54,8 +65,8 @@ console.log(balmErrors)
         <Route path="/" element={<Home collectionCategories={ collectionCategories } setUpdateAfterCollection={ setUpdateAfterCollection } handleSkincareCard={ handleSkincareCard }/>} />
         <Route path="/about" element={<About/>} />
         <Route path="/items/skincare/" element={<Skincare />} />
-        <Route path="/items/skincare/balms" element={<Balm collectionCategories={ collectionCategories }/>} />
-        <Route path="/items/skincare/balms/:id" element={<BalmCard/>} />
+        <Route path="/items/skincare/balms" element={<Balm collectionCategories={ collectionCategories } handleBalmCard={handleBalmCard}/>} />
+        <Route path="/items/skincare/balms/:id" element={<BalmCard collectionCategories={ collectionCategories } individualBalm={individualBalm}/>} />
       </Routes>
     </div>
   );
