@@ -3,10 +3,10 @@ import BalmCard from './BalmCard'
 import { useNavigate, Link } from 'react-router-dom'
 
 const Balm = ( { collectionCategories, handleBalmCard } ) => {
-    console.log(collectionCategories)
+    // console.log(collectionCategories)
     let navigate = useNavigate();
     const [balmCollection, setBalmCollection] = useState([])
-    const [errors, setErrors] = useState([])
+    // const [errors, setErrors] = useState([])
 
     useEffect(() => {
         fetch("/item_categories/1")
@@ -51,7 +51,7 @@ const Balm = ( { collectionCategories, handleBalmCard } ) => {
             //     key={ balms.id }
 
             // />
-            <Link to ={`/items/skincare/balms/${balms.id}/`}>
+            <Link key={ balms.id } to ={`/items/skincare/balms/${balms.id}/`}>
             <div 
             // onClick={handleBalmCard}
             id={ balms.id }
@@ -70,7 +70,7 @@ const Balm = ( { collectionCategories, handleBalmCard } ) => {
 
   return (
     <div className="mx-20 my-8">
-      <div className="gap-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="gap-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         { renderBalmCollections }
       </div>
     </div>
