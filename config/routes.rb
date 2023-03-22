@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :sub_items
   resources :item_categories
   resources :items
   # Routing logic: fallback requests for React Router.

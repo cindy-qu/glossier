@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_16_174235) do
+ActiveRecord::Schema.define(version: 2023_03_20_225459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,5 +41,24 @@ ActiveRecord::Schema.define(version: 2023_03_16_174235) do
     t.index ["item_category_id"], name: "index_items_on_item_category_id"
   end
 
+  create_table "sub_items", force: :cascade do |t|
+    t.string "item_detail"
+    t.string "color"
+    t.string "images"
+    t.string "release_date"
+    t.float "original_price"
+    t.string "size"
+    t.string "description"
+    t.string "ingredients"
+    t.boolean "store_exclusive"
+    t.boolean "limited_edition"
+    t.boolean "discontinued"
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_sub_items_on_item_id"
+  end
+
   add_foreign_key "items", "item_categories"
+  add_foreign_key "sub_items", "items"
 end

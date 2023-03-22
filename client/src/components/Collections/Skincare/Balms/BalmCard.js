@@ -9,7 +9,7 @@ const BalmCard = ({ collectionCategories, individualBalm }) => {
   const params = useParams();
 
   useEffect(() => {
-    fetch(`/items/${params.id}`)
+    fetch(`/sub_items/${params.id}`)
       .then(res => res.json())
       .then(res => setBalmInformation(res))
 
@@ -50,7 +50,8 @@ const BalmCard = ({ collectionCategories, individualBalm }) => {
         </div>
         <img className="w-full sm:w-full md:w-full lg:w-2/6" src={balmImage} onError={reloadSrc} alt={balmInformation?.item_name}></img>
         <div className="text-left">
-          <h1 className="font-[700] text-2xl ">{balmInformation?.item_name}</h1>
+          <h1 className="font-[700] text-2xl ">Balm Dotcom</h1>
+          <h2 className="font-[700] text-xl ">{balmInformation?.color}</h2>
           <p className="font-[200]">{balmInformation?.item_detail}</p>
           <div className="my-4">
             <div className="columns-1 lg:columns-2">

@@ -3,7 +3,26 @@
 require 'csv'
 
 
-CSV.foreach(Rails.root.join('lib/tasks/seed_csv/balm.csv'), headers:true) do |row|
+CSV.foreach(Rails.root.join('lib/tasks/seed_csv/skincare.csv'), headers:true) do |row|
+    Item.create({
+        item_category_id: row["item_category"],
+        item_name: row[0],
+        item_detail: row[1],
+        color: row["color"],
+        images: row["images"],
+        release_date: row["release_date"],
+        original_price: row["original_price"],
+        size: row["size"],
+        description: row["description"],
+        ingredients: row["ingredients"],
+        store_exclusive: row["store_exclusive"],
+        limited_edition: row["limited_edition"],
+        discontinued: row["discontinued"],
+        
+    })
+end
+
+CSV.foreach(Rails.root.join('lib/tasks/seed_csv/glossiWear.csv'), headers:true) do |row|
     Item.create({
         item_category_id: row["item_category"],
         item_name: row[0],
@@ -36,3 +55,23 @@ CSV.foreach(Rails.root.join('lib/tasks/seed_csv/category.csv'), headers:true) do
         category_image: row[1]
     })
 end
+
+
+CSV.foreach(Rails.root.join('lib/tasks/seed_csv/balm2.csv'), headers:true) do |row|
+    SubItem.create({
+        item_id: row["item"],
+        item_detail: row[0],
+        color: row["color"],
+        images: row["images"],
+        release_date: row["release_date"],
+        original_price: row["original_price"],
+        size: row["size"],
+        description: row["description"],
+        ingredients: row["ingredients"],
+        store_exclusive: row["store_exclusive"],
+        limited_edition: row["limited_edition"],
+        discontinued: row["discontinued"],
+        
+    })
+end
+

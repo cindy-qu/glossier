@@ -9,7 +9,7 @@ const Balm = ( { collectionCategories, handleBalmCard } ) => {
     // const [errors, setErrors] = useState([])
 
     useEffect(() => {
-        fetch("/item_categories/1")
+        fetch("/items/1")
         .then(res => res.json())
         .then(res => setBalmCollection(res))
 
@@ -35,7 +35,7 @@ const Balm = ( { collectionCategories, handleBalmCard } ) => {
     // var img3 = field[2];
 
 
-    const renderBalmCollections = balmCollection?.items?.map((balms) => {
+    const renderBalmCollections = balmCollection?.sub_items?.map((balms) => {
 
       const str = balms?.images;
   
