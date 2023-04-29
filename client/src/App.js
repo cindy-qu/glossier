@@ -11,6 +11,8 @@ import BalmCard from './components/Collections/Skincare/Balms/BalmCard'
 import SkinCard from './components/Collections/Skincare/SkinCard'
 import Glossiwear from './components/Collections/Glossiwear/Glossiwear'
 import GlossiwearCard from './components/Collections/Glossiwear/GlossiwearCard'
+import Stickers from './components/Collections/Stickers/Stickers'
+import StickerCard from './components/Collections/Stickers/StickerCard'
 
 function App() {
   const [errors, setErrors] = useState([])
@@ -73,6 +75,8 @@ function App() {
         <Route path="/items/skincare/balms/:id" element={<BalmCard collectionCategories={collectionCategories} individualBalm={individualBalm} />} />
         <Route path="/items/glossiwear/" element={<Glossiwear  />} />
         <Route path="/items/glossiwear/:id" element={<GlossiwearCard />} />
+        <Route path="/items/stickers/" element={<Stickers  />} />
+        <Route path="/items/stickers/:id" element={<StickerCard />} />
 
 
       </Routes>
