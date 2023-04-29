@@ -66,7 +66,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Routes>
+      <Routes >
         <Route path="/" element={<Home collectionCategories={collectionCategories} setUpdateAfterCollection={setUpdateAfterCollection} handleSkincareCard={handleSkincareCard} />} />
         <Route path="/about" element={<About />} />
         <Route path="/items/skincare/" element={<Skincare />} />

@@ -23,7 +23,7 @@ const CollectionCard = ({ item_type_id, item_type, category_image, handleSkincar
   }
 
   return (
-    <Link>
+    <Link >
       <div onClick={handleOpenCard} className="transform transition duration-500 hover:scale-105  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 font-apercu">
         <img src={category_image} className="rounded-t-lg " alt={collectionCapitalize}></img>
         <div className="p-5">

@@ -29,7 +29,7 @@ const StickerCard = () => {
           <div className="my-4">
             <div className="columns-1 lg:columns-2">
               <div>
-                <p> <b>Image Source:</b> <a href={stickerInformation?.description} >{stickerInformation?.description}</a> </p>
+                <p> <b>Image Source:</b> <a href={stickerInformation?.description} target="_blank" rel="noreferrer">{stickerInformation?.description}</a> </p>
                 {/* <p> <b>Original Price:</b> ${wearInformation?.original_price} </p>
                 <p> <b>Size:</b> {wearInformation?.size}</p> */}
               </div>

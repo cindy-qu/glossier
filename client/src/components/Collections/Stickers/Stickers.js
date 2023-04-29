@@ -14,7 +14,7 @@ const Stickers = () => {
     const renderStickerCollection = stickerCollection?.items?.map((sticker) => {
         return (
             <Link key={sticker?.id} to={`/items/stickers/${sticker.id}`}>
-                <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 font-apercu" >
+                <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 font-apercu" >
                     <img className="object-contain rounded-t-lg w-full h-64  " alt={sticker.item_name} src={sticker?.images}></img>
                     <div className="p-5">
                         <h2>{sticker.item_name}</h2>
