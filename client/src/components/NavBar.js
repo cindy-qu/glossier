@@ -12,46 +12,40 @@ const NavBar = () => {
 
     const navigate = useNavigate();
 
+    const [searchItem, setSearchItem] = useState("")
+
+    const handleSearch = (e) => {
+        setSearchItem(e.target.value)
+    }
+    // console.log(searchItem)
+
+    async function fetchSearch ( searchItem )  {
+           let response = await fetch(`http://localhost:3000/search/${searchItem}`, {
+           method: "GET",
+           headers:{
+               'Accept': 'application/json',
+               'Content-Type': 'application/json',
+           },
+  
+       })
+
+       let responseJson = await response.json()
+       return responseJson
+      
+   }
+
+    const handleKeyDown = async (e) => {
+       
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const searchArray = await fetchSearch(searchItem)
+            //  console.log(searchArray)
+            navigate(`/results/${searchItem}`)
+        }
+    }
 
   return (
-    // <div className="bg-glossier-pink font-apercu">
-    //     <div className="flex justify-center p-4">
-    //         <NavLink 
-    //             to="/"
-    //         >
-    //             <img src = {GFLogo} className="object-contain h-10 w-10 rounded-full "></img>    
-    //         </NavLink> 
 
-    //         <NavLink 
-    //             to="/"
-    //         > 
-    //             <h1 className="italic font-semibold text-white text-2xl px-2">Glossier Fanatics</h1>
-                
-    //         </NavLink>  
-    //     </div>
-    //     <div className="font-semibold text-sm py-1">
-    //         <NavLink
-    //             to="/"
-    //             className="px-2 "
-    //         >
-    //             Home
-    //         </NavLink>
-    //         <NavLink
-    //             to="/about"
-    //             className="px-2"
-    //         >
-    //             About
-    //         </NavLink>
-    //         <NavLink
-    //             to="/about"
-    //             className="px-2 inline flex justify-end"
-    //         >
-    //             About
-    //         </NavLink>
-    //     </div>
-
-       
-    // </div>
     
 <nav className="bg-glossier-pink font-apercu  w-full z-20 top-0 left-0 mb-2 ">
     
@@ -77,7 +71,7 @@ const NavBar = () => {
         <div className={searchVisible}>
             <div className="fixed top-0 left-0 right-0 bottom-0 flex flex-col w-full z-20 bg-red-200 bg-opacity-75  overflow-y-auto ">
                 <i onClick={() => setIsSearchOpen((prev) => !prev)} className="text-2xl text-white fa-regular fa-circle-xmark"></i>
-                <input type="search" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-200" placeholder="Search Product" required />
+                <input onChange={handleSearch} onKeyDown={handleKeyDown} type="search" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-200" placeholder="Search Product" required />
             </div>
         </div>
 
@@ -86,7 +80,7 @@ const NavBar = () => {
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i className="text-red-300 fa-solid fa-magnifying-glass"></i>   
                 </div>
-                <input type="search" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-200" placeholder="Search Product" required />
+                <input onChange={handleSearch} onKeyDown={handleKeyDown} type="search" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-200" placeholder="Search Product" required />
             
             </div>
         </form>

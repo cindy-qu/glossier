@@ -13,6 +13,7 @@ import Glossiwear from './components/Collections/Glossiwear/Glossiwear'
 import GlossiwearCard from './components/Collections/Glossiwear/GlossiwearCard'
 import Stickers from './components/Collections/Stickers/Stickers'
 import StickerCard from './components/Collections/Stickers/StickerCard'
+import Results from './components/Collections/Search/Results'
 
 function App() {
   const [errors, setErrors] = useState([])
@@ -62,6 +63,7 @@ function App() {
 
   }
 
+  
 
   return (
     <div className="App">
@@ -77,7 +79,7 @@ function App() {
         <Route path="/items/glossiwear/:id" element={<GlossiwearCard />} />
         <Route path="/items/stickers/" element={<Stickers  />} />
         <Route path="/items/stickers/:id" element={<StickerCard />} />
-
+        <Route path="/results/:search" element={<Results />} />
 
       </Routes>
     </div>
