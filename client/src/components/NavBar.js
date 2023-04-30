@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom'
 import GFLogo from './Images/GF Logo.png'
 
-const NavBar = () => {
+const NavBar = ({handleSearch,handleKeyDown}) => {
 
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -12,37 +12,37 @@ const NavBar = () => {
 
     const navigate = useNavigate();
 
-    const [searchItem, setSearchItem] = useState("")
+//     const [searchItem, setSearchItem] = useState("")
 
-    const handleSearch = (e) => {
-        setSearchItem(e.target.value)
-    }
-    // console.log(searchItem)
+//     const handleSearch = (e) => {
+//         setSearchItem(e.target.value)
+//     }
+//     // console.log(searchItem)
 
-    async function fetchSearch ( searchItem )  {
-           let response = await fetch(`http://localhost:3000/search/${searchItem}`, {
-           method: "GET",
-           headers:{
-               'Accept': 'application/json',
-               'Content-Type': 'application/json',
-           },
+//     async function fetchSearch ( searchItem )  {
+//            let response = await fetch(`http://localhost:3000/search/${searchItem}`, {
+//            method: "GET",
+//            headers:{
+//                'Accept': 'application/json',
+//                'Content-Type': 'application/json',
+//            },
   
-       })
+//        })
 
-       let responseJson = await response.json()
-       return responseJson
+//        let responseJson = await response.json()
+//        return responseJson
       
-   }
+//    }
 
-    const handleKeyDown = async (e) => {
+//     const handleKeyDown = async (e) => {
        
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const searchArray = await fetchSearch(searchItem)
-            //  console.log(searchArray)
-            navigate(`/results/${searchItem}`)
-        }
-    }
+//         if (e.key === 'Enter') {
+//             e.preventDefault();
+//             const searchArray = await fetchSearch(searchItem)
+//             //  console.log(searchArray)
+//             navigate(`/results/${searchItem}`)
+//         }
+//     }
 
   return (
 

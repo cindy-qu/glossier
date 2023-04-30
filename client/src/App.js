@@ -63,11 +63,42 @@ function App() {
 
   }
 
-  
+  const [searchItem, setSearchItem] = useState("")
+  const [searchDetail, setSearchDetail] = useState([])
+  const handleSearch = (e) => {
+      setSearchItem(e.target.value)
+  }
+  // console.log(searchItem)
+
+  async function fetchSearch ( searchItem )  {
+         let response = await fetch(`http://localhost:3000/search/${searchItem}`, {
+         method: "GET",
+         headers:{
+             'Accept': 'application/json',
+             'Content-Type': 'application/json',
+         },
+
+     })
+
+     let responseJson = await response.json()
+     return responseJson
+    
+ }
+
+  const handleKeyDown = async (e) => {
+     
+      if (e.key === 'Enter') {
+          e.preventDefault();
+          const searchArray = await fetchSearch(searchItem)
+          setSearchDetail(searchArray)
+          navigate(`/results/${searchItem}`)
+      }
+  }
+
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar handleSearch={handleSearch} handleKeyDown={handleKeyDown}/>
       <Routes >
         <Route path="/" element={<Home collectionCategories={collectionCategories} setUpdateAfterCollection={setUpdateAfterCollection} handleSkincareCard={handleSkincareCard} />} />
         <Route path="/about" element={<About />} />
@@ -79,7 +110,7 @@ function App() {
         <Route path="/items/glossiwear/:id" element={<GlossiwearCard />} />
         <Route path="/items/stickers/" element={<Stickers  />} />
         <Route path="/items/stickers/:id" element={<StickerCard />} />
-        <Route path="/results/:search" element={<Results />} />
+        <Route path="/results/:search" element={<Results searchDetail={searchDetail}/>} />
 
       </Routes>
     </div>

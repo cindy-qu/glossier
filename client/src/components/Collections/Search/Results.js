@@ -2,27 +2,27 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import ResultCard from './ResultCard'
 
-const Results = () => {
+const Results = ({searchDetail}) => {
 
-    const [searchDetail, setSearchDetail] = useState([])
+    // const [searchDetail, setSearchDetail] = useState([])
 
     const params = useParams();
     const searchTerm = params.search
 
-    async function fetchSearch ( searchTerm )  {
-      let response = await fetch(`http://localhost:3000/search/${searchTerm}`, {
-      method: "GET",
-      headers:{
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-      },
+//     async function fetchSearch ( searchTerm )  {
+//       let response = await fetch(`http://localhost:3000/search/${searchTerm}`, {
+//       method: "GET",
+//       headers:{
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json',
+//       },
 
-  })
+//   })
 
-  let responseJson = await response.json()
-  return responseJson
+//   let responseJson = await response.json()
+//   return responseJson
  
-}
+// }
 
 // const handleKeyDown = async (e) => {
   
@@ -35,20 +35,20 @@ const Results = () => {
 // }
 // handleKeyDown()
 
-    useEffect(() => {
+    // useEffect(() => {
 
 
-            fetchSearch(searchTerm)
+    //         fetchSearch(searchTerm)
 
             
-            .then((info) => {
-              setSearchDetail(info)
+    //         .then((info) => {
+    //           setSearchDetail(info)
 
-            }
-            )
-            return searchDetail
+    //         }
+    //         )
+    //         return searchDetail
 
-    }, [])
+    // }, [])
 
 
 
