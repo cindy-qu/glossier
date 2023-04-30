@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import GFLogo from './Images/GF Logo.png'
 
 const NavBar = ({handleSearch,handleKeyDown}) => {
@@ -10,7 +10,7 @@ const NavBar = ({handleSearch,handleKeyDown}) => {
     const navVisible = isNavOpen ? "w-full md:block md:w-auto " :  "hidden w-full md:block md:w-auto"
     const searchVisible = isSearchOpen ? " " :  "hidden"
 
-    const navigate = useNavigate();
+
 
 //     const [searchItem, setSearchItem] = useState("")
 
@@ -67,11 +67,17 @@ const NavBar = ({handleSearch,handleKeyDown}) => {
             <i className="text-red-300 fa-solid fa-magnifying-glass"></i> 
         </button>
 
-
+{/* Mobile Search Bar */}
         <div className={searchVisible}>
             <div className="fixed top-0 left-0 right-0 bottom-0 flex flex-col w-full z-20 bg-red-200 bg-opacity-75  overflow-y-auto ">
                 <i onClick={() => setIsSearchOpen((prev) => !prev)} className="text-2xl text-white fa-regular fa-circle-xmark"></i>
-                <input onChange={handleSearch} onKeyDown={handleKeyDown} type="search" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-200" placeholder="Search Product" required />
+                <div className="relative mx-5">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i className="text-red-300 fa-solid fa-magnifying-glass"></i>   
+                    </div>
+                    <input onChange={handleSearch} onKeyDown={handleKeyDown} type="search" className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-200" placeholder="Search Product" required />
+                </div>
+                
             </div>
         </div>
 
