@@ -1,5 +1,6 @@
 
 class TestsuitesController < ApplicationController
+    skip_before_action :authorize
     def search
         search_term = params[:search_term]
         results = Item.where("lower(item_name) LIKE ?", "%#{search_term.downcase}%")

@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+    skip_before_action :authorize
     def index
         items = Item.all
         render json: items, status: :ok

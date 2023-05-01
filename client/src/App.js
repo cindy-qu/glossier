@@ -5,15 +5,17 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import About from './components/About';
-import Skincare from './components/Collections/Skincare/Skincare'
-import Balm from './components/Collections/Skincare/Balms/Balm'
-import BalmCard from './components/Collections/Skincare/Balms/BalmCard'
-import SkinCard from './components/Collections/Skincare/SkinCard'
-import Glossiwear from './components/Collections/Glossiwear/Glossiwear'
-import GlossiwearCard from './components/Collections/Glossiwear/GlossiwearCard'
-import Stickers from './components/Collections/Stickers/Stickers'
-import StickerCard from './components/Collections/Stickers/StickerCard'
-import Results from './components/Collections/Search/Results'
+import Skincare from './components/Collections/Skincare/Skincare';
+import Balm from './components/Collections/Skincare/Balms/Balm';
+import BalmCard from './components/Collections/Skincare/Balms/BalmCard';
+import SkinCard from './components/Collections/Skincare/SkinCard';
+import Glossiwear from './components/Collections/Glossiwear/Glossiwear';
+import GlossiwearCard from './components/Collections/Glossiwear/GlossiwearCard';
+import Stickers from './components/Collections/Stickers/Stickers';
+import StickerCard from './components/Collections/Stickers/StickerCard';
+import Results from './components/Collections/Search/Results';
+import Profile from './components/Profile/Profile';
+import Login from './components/Profile/Login';
 
 function App() {
   const [errors, setErrors] = useState([])
@@ -96,6 +98,22 @@ function App() {
   }
 
 
+  // user information
+  const [user, setUser] = useState(null)
+
+  // automatically login if user_id is in session, load home page
+    useEffect(() => {
+      fetch("/me").then((res) => {
+        if (res.ok) {
+          res.json().then((userData) => {
+            setUser(userData);
+          });
+        }
+      });
+    }, [])
+
+
+
   return (
     <div className="App">
       <NavBar handleSearch={handleSearch} handleKeyDown={handleKeyDown}/>
@@ -111,7 +129,8 @@ function App() {
         <Route path="/items/stickers/" element={<Stickers  />} />
         <Route path="/items/stickers/:id" element={<StickerCard />} />
         <Route path="/results/:search" element={<Results searchDetail={searchDetail}/>} />
-
+        <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
+        <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
       </Routes>
     </div>
   );

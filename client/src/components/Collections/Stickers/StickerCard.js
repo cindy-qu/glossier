@@ -40,6 +40,15 @@ const StickerCard = () => {
             </div>
 
           </div>
+          <div>
+            <button>ADD TO</button>
+            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+              <option value="Collection">My Collection</option>
+              <option value="Wishlist">Wishlist</option>
+            </select>
+            <button><i className="fa-solid fa-plus"></i></button>
+            <button><i className="fa-solid fa-minus"></i></button>
+          </div>
         </div>
       </div>
     </div>

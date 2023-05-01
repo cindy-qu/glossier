@@ -1,4 +1,5 @@
 class SubItemsController < ApplicationController
+    skip_before_action :authorize
     def index
         subitems = SubItem.all
         render json: subitems, status: :ok

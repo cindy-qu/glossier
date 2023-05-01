@@ -90,7 +90,9 @@ const NavBar = ({handleSearch,handleKeyDown}) => {
             
             </div>
         </form>
-        <NavLink to="/" className="align-left text-red-300 hover:text-red-400 font-medium rounded-md text-sm px-4 py-2 "><i className="fa-solid fa-user"></i></NavLink>   
+
+        {/* User */}
+        <NavLink to="/profile" className="align-left text-red-300 hover:text-red-400 font-medium rounded-md text-sm px-4 py-2 "><i className="fa-solid fa-user"></i></NavLink>   
     </div>
 
  

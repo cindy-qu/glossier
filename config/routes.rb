@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   
+  resources :users
   resources :sub_items
   resources :item_categories
   resources :items
+  
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
   get '/search/:search_term', to: 'testsuites#search'
   # # '/search/:search_term', to: 'testsuite#search`
