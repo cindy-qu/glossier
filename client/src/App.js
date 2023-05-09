@@ -16,6 +16,8 @@ import StickerCard from './components/Collections/Stickers/StickerCard';
 import Results from './components/Collections/Search/Results';
 import Profile from './components/Profile/Profile';
 import Login from './components/Profile/Login';
+import Wishlist from './components/Wishlist/Wishlist';
+import MyCollection from './components/MyCollection/MyCollection';
 
 function App() {
   const [errors, setErrors] = useState([])
@@ -112,7 +114,8 @@ function App() {
       });
     }, [])
 
-
+    // fetch wishlist items
+    
 
   return (
     <div className="App">
@@ -127,10 +130,12 @@ function App() {
         <Route path="/items/glossiwear/" element={<Glossiwear  />} />
         <Route path="/items/glossiwear/:id" element={<GlossiwearCard />} />
         <Route path="/items/stickers/" element={<Stickers  />} />
-        <Route path="/items/stickers/:id" element={<StickerCard />} />
+        <Route path="/items/stickers/:id" element={<StickerCard user={user}/>} />
         <Route path="/results/:search" element={<Results searchDetail={searchDetail}/>} />
         <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
         <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/mycollection" element={<MyCollection />} />
       </Routes>
     </div>
   );

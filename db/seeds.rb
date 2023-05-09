@@ -96,3 +96,4 @@ end
 
 User.destroy_all
 cindy = User.create(username: 'cindyqu42', password: "12345")
+

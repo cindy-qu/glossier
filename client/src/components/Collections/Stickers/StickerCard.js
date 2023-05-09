@@ -1,10 +1,45 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const StickerCard = () => {
+const StickerCard = ({ user }) => {
     const [stickerInformation, setStickerInformation] = useState([]);
 
+    const [list, setList] = useState("Collection")
+    const handleList = (e) => {
+      setList(e.target.value)
+
+    }
+
     const params = useParams();
+
+    const [listDetail, setListDetail] = useState([]);
+    const [errors, setErrors] = useState([]);
+
+    const handleAddList = (e) => {
+      console.log(params)
+      const listData = {
+        user_id: user.id,
+        item_id: params.id,
+        list_type: list,
+      }
+
+      fetch(`/lists`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(listData)
+      })
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((userData) => {
+            setListDetail(userData)
+          });
+        } else {
+          res.json().then((err) => setErrors(err.errors))
+        }
+      })
+    }
 
     useEffect(() => {
         fetch(`/items/${params.id}`)
@@ -12,7 +47,7 @@ const StickerCard = () => {
         .then(res => setStickerInformation(res))
     }, [])
 
-
+console.log(errors)
   return (
     <div className="container mx-auto font-apercu my-8 xl:px-20 lg:px-20 md:px-2 sm:px-10 px-10">
       <div className=" columns-1 sm:columns-1 md:columns-2 lg:columns-3 lg:flex xl:columns-3 gap-8">
@@ -41,12 +76,12 @@ const StickerCard = () => {
 
           </div>
           <div>
-            <button>ADD TO</button>
-            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-              <option value="Collection">My Collection</option>
+            <button onClick={handleAddList}>ADD TO</button>
+            <select value={list} onChange={handleList} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+              <option value="Collection">Collection</option>
               <option value="Wishlist">Wishlist</option>
             </select>
-            <button><i className="fa-solid fa-plus"></i></button>
+            <button onClick={handleAddList}><i className="fa-solid fa-plus"></i></button>
             <button><i className="fa-solid fa-minus"></i></button>
           </div>
         </div>

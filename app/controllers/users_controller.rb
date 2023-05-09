@@ -15,8 +15,8 @@ class UsersController < ApplicationController
      #keep logged-in
      def show
          current_user = User.find(session[:user_id])
-        #  render json: current_user, include: ['restaurants', 'restaurants.bookmarks'],  status: :ok
-        render json: current_user,  status: :ok
+         render json: current_user, include: ['items', 'items.lists'],  status: :ok
+        # render json: current_user,  status: :ok
      end
  
      private
