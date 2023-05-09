@@ -2,12 +2,12 @@ class ListsController < ApplicationController
 
     def index
         lists = List.all
-        render json: lists, status: :ok
+        render json: lists, include: ['item', 'user','item.item_category'], status: :ok
     end
 
     def show
         list = List.find(params[:id])
-        render json: list, status: :ok
+        render json: list, status: :ok, include: ['item', 'user','item.item_category'], status: :ok
     end
 
     def create

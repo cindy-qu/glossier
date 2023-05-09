@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const StickerCard = ({ user }) => {
+const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfterRemove }) => {
     const [stickerInformation, setStickerInformation] = useState([]);
 
     const [list, setList] = useState("Collection")
+
+    const [getList, setGetList] = useState([])
     const handleList = (e) => {
       setList(e.target.value)
 
@@ -34,12 +36,24 @@ const StickerCard = ({ user }) => {
         if (res.ok) {
           res.json().then((userData) => {
             setListDetail(userData)
-          });
+          }).then(setUpdateAfterCreate);
         } else {
           res.json().then((err) => setErrors(err.errors))
         }
       })
     }
+
+    // function fetchListId(){
+    //   fetch(`/lists`).then((res)=> {
+    //     if (res.ok) {
+    //       res.json().then((listData)=> {
+    //         setGetList(listData)
+    //       })
+    //     }console.log(getList)
+    //   })
+    // }
+
+console.log(updateListItems)
 
     useEffect(() => {
         fetch(`/items/${params.id}`)
@@ -48,6 +62,16 @@ const StickerCard = ({ user }) => {
     }, [])
 
 console.log(errors)
+console.log(stickerInformation.lists)
+let renderCollectionId = stickerInformation?.lists?.filter(type => type.list_type.includes(`${list}`))
+// console.log(renderCollectionId[0]?.id)
+    function handleRemoveItem(){
+      fetch(`/lists/${renderCollectionId[0]?.id}}`, {
+        method: "DELETE",
+      })
+      .then(setUpdateAfterRemove)
+    }
+
   return (
     <div className="container mx-auto font-apercu my-8 xl:px-20 lg:px-20 md:px-2 sm:px-10 px-10">
       <div className=" columns-1 sm:columns-1 md:columns-2 lg:columns-3 lg:flex xl:columns-3 gap-8">
@@ -77,12 +101,13 @@ console.log(errors)
           </div>
           <div>
             <button onClick={handleAddList}>ADD TO</button>
+            <button onClick={handleRemoveItem}>REMOVE</button>
             <select value={list} onChange={handleList} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
               <option value="Collection">Collection</option>
               <option value="Wishlist">Wishlist</option>
             </select>
             <button onClick={handleAddList}><i className="fa-solid fa-plus"></i></button>
-            <button><i className="fa-solid fa-minus"></i></button>
+            {/* <button><i className="fa-solid fa-minus"></i></button> */}
           </div>
         </div>
       </div>

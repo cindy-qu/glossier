@@ -23,6 +23,9 @@ function App() {
   const [errors, setErrors] = useState([])
   const [collectionCategories, setCollectionCategories] = useState([])
   const [updateAfterCollection, setUpdateAfterCollection] = useState([])
+  const [updateListItems, setUpdateListItems] = useState([])
+  const [updateAfterCreate, setUpdateAfterCreate] = useState(false)
+  const [updateAfterRemove, setUpdateAfterRemove] = useState(false)
 
   let navigate = useNavigate();
   const [skincareCollection, setSkincareCollection] = useState([])
@@ -109,12 +112,14 @@ function App() {
         if (res.ok) {
           res.json().then((userData) => {
             setUser(userData);
+            setUpdateListItems(userData)
           });
         }
       });
-    }, [])
+    }, [updateAfterCreate, updateAfterRemove])
 
     // fetch wishlist items
+    
     
 
   return (
@@ -130,7 +135,7 @@ function App() {
         <Route path="/items/glossiwear/" element={<Glossiwear  />} />
         <Route path="/items/glossiwear/:id" element={<GlossiwearCard />} />
         <Route path="/items/stickers/" element={<Stickers  />} />
-        <Route path="/items/stickers/:id" element={<StickerCard user={user}/>} />
+        <Route path="/items/stickers/:id" element={<StickerCard user={user} updateListItems={updateListItems} setUpdateAfterCreate={setUpdateAfterCreate} setUpdateAfterRemove={setUpdateAfterRemove}/>} />
         <Route path="/results/:search" element={<Results searchDetail={searchDetail}/>} />
         <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
         <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
