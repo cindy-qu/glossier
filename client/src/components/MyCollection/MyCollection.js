@@ -15,6 +15,8 @@ const Wishlist = () => {
             }
         });
     },[])
+console.log(loggedUser)
+
 
     useEffect(() => {
         fetch("/lists").then((res) => {
@@ -27,25 +29,29 @@ const Wishlist = () => {
         });
     },[])
 
-  
+//   console.log(loggedUser?.items[0]?.lists[0]?.list_type)
+
+  let firstFilter = loggedUser?.items.map((product)=>product)
+  console.log(firstFilter)
     let renderFilter = listUser?.filter(product => product.list_type.includes('Collection'))
     console.log(renderFilter)
 
-
-    let renderCollectionMap = renderFilter?.map((product) => {
+    let renderUser = renderFilter?.filter(product => product.user.username.includes(loggedUser?.username))
+console.log(renderUser)
+    let renderCollectionMap = renderUser?.map((product) => {
         // console.log(product)
         const str = product?.item?.images
         var fields = str?.split('~');
         var img1 = fields?.[0];
         const searchName = product?.item?.item_name ? product?.item?.item_name : `${product?.color} ${product?.item?.item_name}`
-console.log(product?.item?.item_category?.item_type)
+// console.log(product?.item?.item_category?.item_type)
 
         const pathName = product?.item?.item_category?.item_type ? product?.item?.item_category?.item_type : `skincare/balms`
-        console.log(pathName)
+        // console.log(pathName)
         return(
             <Link key={product?.id} to={`/items/${pathName}/${product?.item?.id}`}>
                 <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow  font-apercu">
-                    <img className="object-contain rounded-t-lg w-full h-64  " src={img1}/>
+                    <img className="object-contain rounded-t-lg w-full h-64  " src={img1} alt={searchName}/>
                     <div className="p-5">
                     <h2>{searchName}</h2>
                     </div>

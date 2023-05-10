@@ -17,7 +17,7 @@ const Wishlist = () => {
     },[])
 
     useEffect(() => {
-        fetch("/lists").then((res) => {
+        fetch("/wishlists").then((res) => {
             if(res.ok) {
                 res.json().then((userData) => {
                     setListUser(userData);
@@ -27,33 +27,31 @@ const Wishlist = () => {
         });
     },[])
 
-    let renderFilter = listUser?.filter(product => product.list_type.includes('Wishlist'))
-    console.log(renderFilter)
+    console.log(listUser)
 
-    let renderWishlistMap = renderFilter?.map((product) => {
+    // let renderFilter = listUser?.filter(product => product.list_type.includes('Wishlist'))
+
+    let renderUser = listUser?.filter(product => product.user.username.includes(loggedUser?.username))
+    let renderWishlistMap = renderUser?.map((product) => {
+
+        const str = product?.item?.images
+        var fields = str?.split('~')
+        var img1 = fields?.[0];
+        const searchName = product?.item?.item_name ? product?.item?.item_name : `${product?.color} ${product?.item?.item_name}`
+
+        const pathName = product?.item?.item_category?.item_type ? product?.item?.item_category?.item_type : `skincare/balms`
+
         return(
-            <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow  font-apercu">
-               <div className="p-5">
-                    <h2>{product?.item?.item_name}</h2>
+            <Link key={product?.id} to={`/items/${pathName}/${product?.item?.id}`}>
+                <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow  font-apercu">
+                    <img className="object-contain rounded-t-lg w-full h-64  " src={img1} alt={searchName}/>
+                    <div className="p-5">
+                    <h2>{searchName}</h2>
+                    </div>
                 </div>
-            </div>
-          
+            </Link>
         )
     })
-
-    // const renderWishlist = listUser?.list_type?.filter(product => product.match("wishlist")).map((product) => {
-    //     return (
-
-    //             <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow  font-apercu">
-    //                 <div className="p-5">
-    //                     <h2>{product?.item?.item_name}</h2>
-    //                 </div>
-    //             </div>
-
-    //     )
-    // })
-
-
 
 
   return (
@@ -69,3 +67,6 @@ const Wishlist = () => {
 }
 
 export default Wishlist
+
+
+

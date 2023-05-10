@@ -5,4 +5,9 @@ class Item < ApplicationRecord
 
   has_many :lists
   has_many :users, through: :lists
+
+  has_many :wishlists
+  has_many :users, through: :wishlists
+
+  
 end

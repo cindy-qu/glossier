@@ -55,7 +55,7 @@ const NavBar = ({handleSearch,handleKeyDown}) => {
       <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
     </button>
 
-  <a href="/" className="flex   md:order-1 ">
+  <a href="/" className="flex  transform transition duration-500 hover:scale-105 md:order-1 ">
       <img src={GFLogo} className=" object-contain h-10 w-10 rounded-full" alt="Glossier Fanatics Logo"/>
       <span className="self-center italic font-semibold text-white text-2xl px-2 whitespace-nowrap">Glossier Fanatics</span>
   </a>

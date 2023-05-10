@@ -6,6 +6,9 @@ class User < ApplicationRecord
     has_many :lists
     has_many :items, through: :lists
 
+    has_many :wishlists
+    has_many :items, through: :wishlists
+
     validates :password, length: { minimum: 5 }
     validates :username, :password, presence: true
     validates :username, uniqueness: true
