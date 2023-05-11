@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Wishlist = () => {
+const MyCollection = () => {
     const [loggedUser, setLoggedUser] = useState(null);
     const [listUser, setListUser] = useState(null);
     useEffect(() => {
@@ -31,13 +31,13 @@ console.log(loggedUser)
 
 //   console.log(loggedUser?.items[0]?.lists[0]?.list_type)
 
-  let firstFilter = loggedUser?.items.map((product)=>product)
-  console.log(firstFilter)
-    let renderFilter = listUser?.filter(product => product.list_type.includes('Collection'))
-    console.log(renderFilter)
+//   let firstFilter = loggedUser?.items.map((product)=>product)
+//   console.log(firstFilter)
+//     let renderFilter = listUser?.filter(product => product.list_type.includes('Collection'))
+//     console.log(renderFilter)
 
-    let renderUser = renderFilter?.filter(product => product.user.username.includes(loggedUser?.username))
-console.log(renderUser)
+    let renderUser = listUser?.filter(product => product.user.username.includes(loggedUser?.username))
+
     let renderCollectionMap = renderUser?.map((product) => {
         // console.log(product)
         const str = product?.item?.images
@@ -87,4 +87,4 @@ console.log(renderUser)
   )
 }
 
-export default Wishlist
+export default MyCollection

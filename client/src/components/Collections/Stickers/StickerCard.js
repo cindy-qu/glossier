@@ -4,16 +4,22 @@ import { useEffect, useState } from 'react';
 const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfterRemove }) => {
     const [stickerInformation, setStickerInformation] = useState([]);
 
-    const [addButton, setAddButton] = useState(false)
 
-    const [list, setList] = useState("lists")
+    const [valList, setValList] = useState("lists")
 
     // const [getList, setGetList] = useState([])
     const handleList = (e) => {
-      setList(e.target.value)
-
+      setValList(e.target.value)
+      
     }
 
+let showListWishlist ; 
+
+if (valList === 'lists') {
+  showListWishlist = stickerInformation?.lists
+} else {
+  showListWishlist = stickerInformation?.wishlists
+}
     const params = useParams();
 
     const [listDetail, setListDetail] = useState([]);
@@ -24,10 +30,10 @@ const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfte
       const listData = {
         user_id: user.id,
         item_id: params.id,
-        list_type: list,
+        list_type: valList,
       }
 
-      fetch(`/${list}`, {
+      fetch(`/${valList}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +44,6 @@ const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfte
         if (res.ok) {
           res.json().then((userData) => {
             setListDetail(userData)
-            setAddButton(true)
           }).then(setUpdateAfterCreate);
         } else {
           res.json().then((err) => setErrors(err.errors))
@@ -46,7 +51,17 @@ const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfte
       })
     }
 
-    const showButton = !addButton ?             <button onClick={handleAddList}>ADD TO</button> : <button onClick={handleRemoveItem}>REMOVE</button>
+// console.log(stickerInformation?.lists)
+// console.log(valList)
+    let renderRemoveCollection = showListWishlist?.filter(product => product.user.username.includes(user?.username))
+    let renderRemoveWishlist = showListWishlist?.filter(product => product.user.username.includes(user?.username))
+    // let renderWishlist = stickerInformation?.wishlists?.filter(product => product.user.username.includes(user?.username))
+
+console.log(renderRemoveCollection)
+console.log(renderRemoveWishlist)
+    const showButton = renderRemoveCollection?.length===0 ?  <button onClick={handleAddList}>ADD TO</button> : <button onClick={handleRemoveItem}>REMOVE</button>
+
+    // const showMinuePlusButton = renderRemoveCollection?.length ===0 ?  <button onClick={handleAddList}><i className="fa-solid fa-plus"></i></button> : <button><i className="fa-solid fa-minus"></i></button>
 
     // function fetchListId(){
     //   fetch(`/lists`).then((res)=> {
@@ -58,8 +73,8 @@ const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfte
     //   })
     // }
 
-console.log(updateListItems)
-console.log(list)
+// console.log(updateListItems)
+// console.log(valList)
 
     useEffect(() => {
         fetch(`/items/${params.id}`)
@@ -67,13 +82,14 @@ console.log(list)
         .then(res => setStickerInformation(res))
     }, [])
 
-console.log(errors)
-console.log(stickerInformation.lists)
-console.log(stickerInformation)
-let renderCollectionId = stickerInformation?.lists?.filter(type => type.list_type.includes(`${list}`))
-// console.log(renderCollectionId[0]?.id)
+// console.log(errors)
+// console.log(stickerInformation.lists)
+// console.log(stickerInformation)
+let renderCollectionId = showListWishlist?.filter(type => type.list_type.includes(`${valList}`))
+console.log(stickerInformation?.valList)
+console.log(valList)
     function handleRemoveItem(){
-      fetch(`/${list}/${renderCollectionId[0]?.id}}`, {
+      fetch(`/${valList}/${renderCollectionId[0]?.id}}`, {
         method: "DELETE",
       })
       .then(setUpdateAfterRemove)
@@ -110,12 +126,13 @@ let renderCollectionId = stickerInformation?.lists?.filter(type => type.list_typ
             {/* <button onClick={handleAddList}>ADD TO</button>
             <button onClick={handleRemoveItem}>REMOVE</button> */}
             {showButton}
-            <select value={list} onChange={handleList} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+            <select value={valList} onChange={handleList} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
               <option value="lists">Collection</option>
               <option value="wishlists">Wishlist</option>
             </select>
-            <button onClick={handleAddList}><i className="fa-solid fa-plus"></i></button>
+            {/* <button onClick={handleAddList}><i className="fa-solid fa-plus"></i></button> */}
             {/* <button><i className="fa-solid fa-minus"></i></button> */}
+            {/* {showMinuePlusButton} */}
           </div>
         </div>
       </div>

@@ -4,4 +4,5 @@ class ItemSerializer < ActiveModel::Serializer
   has_many :sub_items
   has_many :lists
   has_many :wishlists
+  has_many :users
 end

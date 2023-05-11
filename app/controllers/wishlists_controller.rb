@@ -29,6 +29,6 @@ class WishlistsController < ApplicationController
     private
 
     def list_params()
-        params.permit(:user_id, :item_id)
+        params.permit(:list_type,:user_id, :item_id)
     end
 end
