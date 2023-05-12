@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfterRemove }) => {
+const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfterRemove, setUpdateStatus, updateAfterCreate, updateAfterRemove }) => {
     const [stickerInformation, setStickerInformation] = useState([]);
 
 
@@ -10,7 +10,7 @@ const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfte
     // const [getList, setGetList] = useState([])
     const handleList = (e) => {
       setValList(e.target.value)
-      
+
     }
 
 let showListWishlist ; 
@@ -59,7 +59,10 @@ if (valList === 'lists') {
 
 console.log(renderRemoveCollection)
 console.log(renderRemoveWishlist)
-    const showButton = renderRemoveCollection?.length===0 ?  <button onClick={handleAddList}>ADD TO</button> : <button onClick={handleRemoveItem}>REMOVE</button>
+    const showButton = renderRemoveCollection?.length===0 ?
+
+      <button className="text-white bg-red-300 hover:bg-red-400  font-medium rounded-l-lg text-sm px-5 py-2.5 text-center " onClick={handleAddList}>ADD TO</button> : 
+      <button className="text-white bg-red-300 hover:bg-red-400  font-medium rounded-l-lg text-sm px-5 py-2.5 text-center " onClick={handleRemoveItem}>REMOVE</button>
 
     // const showMinuePlusButton = renderRemoveCollection?.length ===0 ?  <button onClick={handleAddList}><i className="fa-solid fa-plus"></i></button> : <button><i className="fa-solid fa-minus"></i></button>
 
@@ -80,11 +83,12 @@ console.log(renderRemoveWishlist)
         fetch(`/items/${params.id}`)
         .then(res => res.json())
         .then(res => setStickerInformation(res))
-    }, [])
+        .then(setUpdateStatus)
+    }, [updateAfterCreate, updateAfterRemove])
 
 // console.log(errors)
 // console.log(stickerInformation.lists)
-// console.log(stickerInformation)
+console.log(stickerInformation)
 let renderCollectionId = showListWishlist?.filter(type => type.list_type.includes(`${valList}`))
 console.log(stickerInformation?.valList)
 console.log(valList)
@@ -122,11 +126,12 @@ console.log(valList)
             </div>
 
           </div>
-          <div>
+          <div className="inline flex">
             {/* <button onClick={handleAddList}>ADD TO</button>
             <button onClick={handleRemoveItem}>REMOVE</button> */}
             {showButton}
-            <select value={valList} onChange={handleList} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+           
+            <select value={valList} onChange={handleList} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-blue-500 focus:border-blue-500 block w-4/12 p-2.5 ">
               <option value="lists">Collection</option>
               <option value="wishlists">Wishlist</option>
             </select>

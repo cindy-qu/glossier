@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import MyCollectionCard from './MyCollectionCard';
 
 
 const MyCollection = () => {
     const [loggedUser, setLoggedUser] = useState(null);
     const [listUser, setListUser] = useState(null);
+    const [updateAfterDelete, setUpdateAfterDelete] = useState(false)
+
+
     useEffect(() => {
         fetch("/me").then((res) => {
             if(res.ok) {
@@ -27,7 +31,9 @@ console.log(loggedUser)
                 });
             }
         });
-    },[])
+    },[updateAfterDelete])
+
+    
 
 //   console.log(loggedUser?.items[0]?.lists[0]?.list_type)
 
@@ -48,15 +54,28 @@ console.log(loggedUser)
 
         const pathName = product?.item?.item_category?.item_type ? product?.item?.item_category?.item_type : `skincare/balms`
         // console.log(pathName)
+
+        const productIdName = product?.item?.id
+        
         return(
-            <Link key={product?.id} to={`/items/${pathName}/${product?.item?.id}`}>
-                <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow  font-apercu">
-                    <img className="object-contain rounded-t-lg w-full h-64  " src={img1} alt={searchName}/>
-                    <div className="p-5">
-                    <h2>{searchName}</h2>
-                    </div>
-                </div>
-            </Link>
+            <MyCollectionCard 
+                key={product?.id}
+                key1={product?.id}
+                searchName={searchName}
+                pathName={pathName}
+                img1={img1}
+                productIdName={productIdName}
+                setUpdateAfterDelete={setUpdateAfterDelete}
+
+            />
+            // <Link key={product?.id}  
+            //     <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow  font-apercu">
+            //         <img className="object-contain rounded-t-lg w-full h-64  " src={img1} alt={searchName}/>
+            //         <div className="p-5">
+            //         <h2>{searchName}</h2>
+            //         </div>
+            //     </div>
+            // </Link>
         )
     })
 

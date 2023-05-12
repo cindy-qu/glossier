@@ -4,12 +4,15 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 const Stickers = () => {
     const [stickerCollection, setStickerCollection] = useState([]);
 
+    const [updateStatus, setUpdateStatus] = useState(false)
+
     useEffect(() => {
         fetch("/item_categories/4")
         .then(res => res.json())
         .then(res => setStickerCollection(res))
 
     },[])
+    
 
     const renderStickerCollection = stickerCollection?.items?.map((sticker) => {
         return (
