@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Login from "./Login";
 
+
 const Profile = ({ user, setUser }) => {
 
     const navigate = useNavigate();

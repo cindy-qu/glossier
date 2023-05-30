@@ -1,11 +1,14 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const StickerCard = ({ user, updateListItems,setUpdateAfterCreate, setUpdateAfterRemove, setUpdateStatus, updateAfterCreate, updateAfterRemove }) => {
-    const [stickerInformation, setStickerInformation] = useState([]);
+    
+  const navigate = useNavigate();
+
+  const [stickerInformation, setStickerInformation] = useState([]);
 
 
-    const [valList, setValList] = useState("lists")
+    const [valList, setValList] = useState("lists");
 
     // const [getList, setGetList] = useState([])
     const handleList = (e) => {
@@ -26,29 +29,39 @@ if (valList === 'lists') {
     const [errors, setErrors] = useState([]);
 
     const handleAddList = (e) => {
-      console.log(params)
-      const listData = {
-        user_id: user.id,
-        item_id: params.id,
-        list_type: valList,
+      // console.log(user.id)
+      // console.log(params)
+
+
+      if (!user){
+        navigate('/profile')
+      } else {
+
+        const listData = {
+          user_id: user.id,
+          item_id: params.id,
+          list_type: valList,
+        }
+
+        fetch(`/${valList}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(listData)
+        })
+        .then((res) => {
+          if (res.ok) {
+            res.json().then((userData) => {
+              setListDetail(userData)
+            }).then(setUpdateAfterCreate);
+          } else {
+            res.json().then((err) => setErrors(err.errors))
+          }
+        })
       }
 
-      fetch(`/${valList}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(listData)
-      })
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((userData) => {
-            setListDetail(userData)
-          }).then(setUpdateAfterCreate);
-        } else {
-          res.json().then((err) => setErrors(err.errors))
-        }
-      })
+      
     }
 
 // console.log(stickerInformation?.lists)
@@ -57,8 +70,8 @@ if (valList === 'lists') {
     let renderRemoveWishlist = showListWishlist?.filter(product => product.user.username.includes(user?.username))
     // let renderWishlist = stickerInformation?.wishlists?.filter(product => product.user.username.includes(user?.username))
 
-console.log(renderRemoveCollection)
-console.log(renderRemoveWishlist)
+// console.log(renderRemoveCollection)
+// console.log(renderRemoveWishlist)
     const showButton = renderRemoveCollection?.length===0 ?
 
       <button className="text-white bg-red-300 hover:bg-red-400  font-medium rounded-l-lg text-sm px-5 py-2.5 text-center " onClick={handleAddList}>ADD TO</button> : 
@@ -88,10 +101,10 @@ console.log(renderRemoveWishlist)
 
 // console.log(errors)
 // console.log(stickerInformation.lists)
-console.log(stickerInformation)
+// console.log(stickerInformation)
 let renderCollectionId = showListWishlist?.filter(type => type.list_type.includes(`${valList}`))
-console.log(stickerInformation?.valList)
-console.log(valList)
+// console.log(stickerInformation?.valList)
+// console.log(valList)
     function handleRemoveItem(){
       fetch(`/${valList}/${renderCollectionId[0]?.id}}`, {
         method: "DELETE",
