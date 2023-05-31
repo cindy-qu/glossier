@@ -16,6 +16,7 @@ import StickerCard from './components/Collections/Stickers/StickerCard';
 import Results from './components/Collections/Search/Results';
 import Profile from './components/Profile/Profile';
 import Login from './components/Profile/Login';
+import Signup from './components/Profile/Signup';
 import Wishlist from './components/Wishlist/Wishlist';
 import MyCollection from './components/MyCollection/MyCollection';
 
@@ -141,6 +142,7 @@ function App() {
         <Route path="/results/:search" element={<Results searchDetail={searchDetail}/>} />
         <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
         <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+        <Route path="/signup" element={<Signup user={user} setUser={setUser}/>} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/mycollection" element={<MyCollection/>} />
       </Routes>
