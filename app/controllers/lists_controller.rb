@@ -30,7 +30,7 @@ class ListsController < ApplicationController
     private
 
     def list_params()
-        params.permit(:list_type, :user_id, :item_id)
+        params.permit(:list_type, :user_id, :item_id, :sub_item_id)
     end
 
     

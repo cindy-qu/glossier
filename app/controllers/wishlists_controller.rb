@@ -1,12 +1,12 @@
 class WishlistsController < ApplicationController
     def index
         lists = Wishlist.all
-        render json: lists, include: ['item', 'user','item.item_category'], status: :ok
+        render json: lists, include: ['item', 'user','item.item_category','sub_item'], status: :ok
     end
 
     def show
         list = Wishlist.find(params[:id])
-        render json: list, status: :ok, include: ['item', 'user','item.item_category'], status: :ok
+        render json: list, status: :ok, include: ['item', 'sub_item', 'user','item.item_category'], status: :ok
     end
 
     def create
