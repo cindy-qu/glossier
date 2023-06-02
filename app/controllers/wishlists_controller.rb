@@ -10,8 +10,8 @@ class WishlistsController < ApplicationController
     end
 
     def create
-        list = Wishlist.create!(list_params)
-        render json: list, status: :created
+        wishlists = Wishlist.create!(list_params)
+        render json: wishlists, status: :created
     end
 
     def update
@@ -29,6 +29,7 @@ class WishlistsController < ApplicationController
     private
 
     def list_params()
-        params.permit(:list_type,:user_id, :item_id)
+        params.require(:wishlist).permit(:user_id, :item_id, :list_type, :sub_item_id)
+        
     end
 end

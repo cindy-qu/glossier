@@ -41,6 +41,7 @@ if (valList === 'lists') {
           user_id: user.id,
           item_id: params.id,
           list_type: valList,
+          sub_item_id: 1,
         }
 
         fetch(`/${valList}`, {
