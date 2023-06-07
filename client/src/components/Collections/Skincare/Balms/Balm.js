@@ -14,7 +14,7 @@ const Balm = ( { collectionCategories, handleBalmCard } ) => {
         .then(res => setBalmCollection(res))
 
       },[])
-
+ 
     // const handleBalmCard = (e) => {
     //   fetch(`/items/${e.target.id}`).then ((res) => {
     //     if (res.ok) {
