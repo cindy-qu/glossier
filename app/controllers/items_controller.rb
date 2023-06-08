@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 
     def show
         item = Item.find(params[:id])
-        render json: item, status: :ok
+        # render json: item, include: ['users.lists', 'users.wishlists'], status: :ok
+        render json: item, include: ['lists.user', 'wishlists.user', 'sub_items'], status: :ok
     end
 end

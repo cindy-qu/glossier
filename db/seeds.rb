@@ -95,5 +95,6 @@ CSV.foreach(Rails.root.join('lib/tasks/seed_csv/balm2.csv'), headers:true) do |r
 end
 
 User.destroy_all
+testUser = User.create(username: 'test12345', password: "12345")
 cindy = User.create(username: 'cindyqu42', password: "12345")
 

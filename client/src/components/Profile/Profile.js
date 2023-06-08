@@ -1,7 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Login from "./Login";
 
-const Profile = ({ user }) => {
+
+const Profile = ({ user, setUser }) => {
+
+    const navigate = useNavigate();
+
+    function handleLogoutUser(){
+        fetch("/logout", {
+            method: "DELETE",
+        }).then((res) => {
+            setUser(null)
+            navigate("/")
+        })
+    }
+
+    console.log(user)
+
+    if (!user) return <Login setUser={setUser}/>
+    
 
   return (
     
@@ -10,9 +28,10 @@ const Profile = ({ user }) => {
         <div className="flex flex-col items-center pb-10">
             <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="placeholder"/>
             <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{user?.username}</h5>
+            {/* <h6 className="mb-1 text-l font-medium text-gray-900 dark:text-white">Member since {user?.created_at}</h6> */}
 
             <div className="flex mt-4 space-x-3 md:mt-6">
-                <a href="#" className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log Out</a>
+                <button onClick={handleLogoutUser} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log Out</button>
             </div>
         </div>
         <div>

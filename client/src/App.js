@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import Home from './components/Home';
 import About from './components/About';
+import Contact from './components/Contact';
+
 import Skincare from './components/Collections/Skincare/Skincare';
 import Balm from './components/Collections/Skincare/Balms/Balm';
 import BalmCard from './components/Collections/Skincare/Balms/BalmCard';
@@ -13,9 +16,11 @@ import Glossiwear from './components/Collections/Glossiwear/Glossiwear';
 import GlossiwearCard from './components/Collections/Glossiwear/GlossiwearCard';
 import Stickers from './components/Collections/Stickers/Stickers';
 import StickerCard from './components/Collections/Stickers/StickerCard';
+import Fragrance from './components/Collections/Fragrance/Fragrance';
 import Results from './components/Collections/Search/Results';
 import Profile from './components/Profile/Profile';
 import Login from './components/Profile/Login';
+import Signup from './components/Profile/Signup';
 import Wishlist from './components/Wishlist/Wishlist';
 import MyCollection from './components/MyCollection/MyCollection';
 
@@ -26,6 +31,8 @@ function App() {
   const [updateListItems, setUpdateListItems] = useState([])
   const [updateAfterCreate, setUpdateAfterCreate] = useState(false)
   const [updateAfterRemove, setUpdateAfterRemove] = useState(false)
+  const [updateStatus, setUpdateStatus] = useState(false)
+
 
   let navigate = useNavigate();
   const [skincareCollection, setSkincareCollection] = useState([])
@@ -116,7 +123,7 @@ function App() {
           });
         }
       });
-    }, [updateAfterCreate, updateAfterRemove])
+    }, [updateStatus])
 
     // fetch wishlist items
     
@@ -128,6 +135,8 @@ function App() {
       <Routes >
         <Route path="/" element={<Home collectionCategories={collectionCategories} setUpdateAfterCollection={setUpdateAfterCollection} handleSkincareCard={handleSkincareCard} />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />}/>
+
         <Route path="/items/skincare/" element={<Skincare />} />
         <Route path="/items/skincare/:id" element={<SkinCard />} />
         <Route path="/items/skincare/1" element={<Balm collectionCategories={collectionCategories} handleBalmCard={handleBalmCard} />} />
@@ -135,13 +144,17 @@ function App() {
         <Route path="/items/glossiwear/" element={<Glossiwear  />} />
         <Route path="/items/glossiwear/:id" element={<GlossiwearCard />} />
         <Route path="/items/stickers/" element={<Stickers  />} />
-        <Route path="/items/stickers/:id" element={<StickerCard user={user} updateListItems={updateListItems} setUpdateAfterCreate={setUpdateAfterCreate} setUpdateAfterRemove={setUpdateAfterRemove}/>} />
+        <Route path="/items/stickers/:id" element={<StickerCard user={user} updateListItems={updateListItems} setUpdateAfterCreate={setUpdateAfterCreate} updateAfterCreate={updateAfterCreate} updateAfterRemove={updateAfterRemove} setUpdateAfterRemove={setUpdateAfterRemove} setUpdateStatus={setUpdateStatus}/>} />
         <Route path="/results/:search" element={<Results searchDetail={searchDetail}/>} />
         <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
         <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+        <Route path="/signup" element={<Signup user={user} setUser={setUser}/>} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/mycollection" element={<MyCollection />} />
+        <Route path="/mycollection" element={<MyCollection/>} />
+        <Route path ="/items/fragrance/" element={<Fragrance />} />
+
       </Routes>
+      <Footer />
     </div>
   );
 }

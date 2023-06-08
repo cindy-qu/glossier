@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_09_020432) do
+ActiveRecord::Schema.define(version: 2023_05_30_205227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,9 @@ ActiveRecord::Schema.define(version: 2023_05_09_020432) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "item_id"
+    t.bigint "sub_item_id"
     t.index ["item_id"], name: "index_lists_on_item_id"
+    t.index ["sub_item_id"], name: "index_lists_on_sub_item_id"
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
@@ -76,7 +78,20 @@ ActiveRecord::Schema.define(version: 2023_05_09_020432) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "wishlists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "item_id"
+    t.string "list_type"
+    t.bigint "sub_item_id"
+    t.index ["item_id"], name: "index_wishlists_on_item_id"
+    t.index ["sub_item_id"], name: "index_wishlists_on_sub_item_id"
+    t.index ["user_id"], name: "index_wishlists_on_user_id"
+  end
+
   add_foreign_key "items", "item_categories"
   add_foreign_key "lists", "users"
   add_foreign_key "sub_items", "items"
+  add_foreign_key "wishlists", "users"
 end

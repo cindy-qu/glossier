@@ -2,12 +2,12 @@ class ListsController < ApplicationController
 
     def index
         lists = List.all
-        render json: lists, include: ['item', 'user','item.item_category'], status: :ok
+        render json: lists, include: ['item', 'user','item.item_category','sub_item'], status: :ok
     end
 
     def show
         list = List.find(params[:id])
-        render json: list, status: :ok, include: ['item', 'user','item.item_category'], status: :ok
+        render json: list, status: :ok, include: ['item', 'user','item.item_category','sub_item'], status: :ok
     end
 
     def create
@@ -30,6 +30,8 @@ class ListsController < ApplicationController
     private
 
     def list_params()
-        params.permit(:list_type, :user_id, :item_id)
+        params.permit(:list_type, :user_id, :item_id, :sub_item_id)
     end
+
+    
 end
