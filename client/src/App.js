@@ -32,6 +32,8 @@ function App() {
   const [updateAfterCreate, setUpdateAfterCreate] = useState(false)
   const [updateAfterRemove, setUpdateAfterRemove] = useState(false)
   const [updateStatus, setUpdateStatus] = useState(false)
+  const [updateAfterImageUpdate, setUpdateAfterImageUpdate] = useState(false)
+  const [updateAfterUsername, setUpdateAfterUsername] = useState(false)
 
 
   let navigate = useNavigate();
@@ -123,7 +125,7 @@ function App() {
           });
         }
       });
-    }, [updateStatus])
+    }, [updateStatus, updateAfterImageUpdate, updateAfterUsername])
 
     // fetch wishlist items
     
@@ -146,7 +148,7 @@ function App() {
         <Route path="/items/stickers/" element={<Stickers  />} />
         <Route path="/items/stickers/:id" element={<StickerCard user={user} updateListItems={updateListItems} setUpdateAfterCreate={setUpdateAfterCreate} updateAfterCreate={updateAfterCreate} updateAfterRemove={updateAfterRemove} setUpdateAfterRemove={setUpdateAfterRemove} setUpdateStatus={setUpdateStatus}/>} />
         <Route path="/results/:search" element={<Results searchDetail={searchDetail}/>} />
-        <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
+        <Route path="/profile" element={<Profile user={user} setUser={setUser} setUpdateAfterImageUpdate={setUpdateAfterImageUpdate} updateAfterImageUpdate={updateAfterImageUpdate} setUpdateAfterUsername={setUpdateAfterUsername}/>} />
         <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
         <Route path="/signup" element={<Signup user={user} setUser={setUser}/>} />
         <Route path="/wishlist" element={<Wishlist />} />

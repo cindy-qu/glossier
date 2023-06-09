@@ -2,11 +2,13 @@ Rails.application.routes.draw do
   
   resources :wishlists
   resources :lists
-  resources :users
+  resources :users, only: [:create, :update, :destroy]
   resources :sub_items
   resources :item_categories
   resources :items
-  
+
+  default_url_options :host => "http://localhost:3000"
+
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
 

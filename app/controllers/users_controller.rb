@@ -11,6 +11,18 @@ class UsersController < ApplicationController
              render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
          end
      end
+
+     #PATCH - update a user profile (except password)
+     def update
+        user = User.find(params[:id])
+        #check if avatar is attached in params, is user has current avatar, purge old one and replace with newly attached
+        if params[:avatar] 
+            user.avatar.attached? 
+            user.avatar.purge
+        end
+        user.update!(user_update_params)
+        render json: user, status: :accepted
+     end
  
      #keep logged-in
      def show
@@ -22,7 +34,11 @@ class UsersController < ApplicationController
      private
  
      def user_params
-         params.permit(:username, :password, :password_confirmation)
+         params.permit(:username, :password, :password_confirmation, :avatar)
+     end
+
+     def user_update_params
+        params.permit(:id, :avatar, :attachment, :username)
      end
      
  
