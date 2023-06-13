@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   get '/search/:search_term', to: 'testsuites#search'
   # # '/search/:search_term', to: 'testsuite#search`
   # get '/search/:search_term', to: `testsuites#search`
-
+  get '/ebay', to: 'ebay#fetch'
+  post '/search', to: 'ebay#search'
+  
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
