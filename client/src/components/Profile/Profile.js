@@ -216,30 +216,7 @@ const Profile = ({ user, setUser, setUpdateAfterImageUpdate, setUpdateAfterUsern
             {<Username user={user} isLoading={isLoading} handleOnChange={handleOnChange} showUsername={showUsername} closeUsernameToggle={closeUsernameToggle} handleUsernameSubmit={handleUsernameSubmit} formData={formData}/>}
             {<ProfileImage formErrorMsg={formErrorMsg} user={user} isLoading={isLoading} handleOnChange={handleOnChange} showProfileImage={showProfileImage} closeProfileToggle={closeProfileToggle} handleSubmit={handleSubmit} formData={formData}/>}
             
-            {/* <h6 className="mb-1 text-l font-medium text-gray-900 dark:text-white">Member since {user?.created_at}</h6> */}
-            {/* <div className='trip-form-container'>
-            <form className='trip-form' onSubmit={handleSubmit}>
-                <h2>Edit Profile</h2>
-                <label htmlFor="username">Username</label>
-                <input
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleOnChange}
-                />
 
-                <label htmlFor="avatar">Profile Image</label>
-                <input
-                    id='file-upload'
-                    type="file"
-                    name="avatar"
-                />
-
-                <button className='submit-form-btn' type="submit">{isLoading ? "Loading..." : "Submit Changes"}</button>
-            </form>
-
-        <ul>{formErrorMsg}</ul>
-    </div> */}
 
 
             <div className="flex mt-4 space-x-3 md:mt-6">

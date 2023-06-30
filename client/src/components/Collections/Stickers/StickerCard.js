@@ -144,7 +144,7 @@ const ebayItems = ebayTitle?.map((ebayItem)=> {
           <div key={ebayItem?.title} className="max-w-full flex">
 
               <img className="border-l border-b border-t border-gray-400 
-                              h-30 md:h:36 lg:h-48  
+                              h-30 md:h:36 lg:h-50  xl:h-50
                               flex-none 
                               bg-cover 
                               rounded-l  
