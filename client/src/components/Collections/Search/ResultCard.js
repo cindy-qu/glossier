@@ -17,7 +17,7 @@ const ResultCard = ({ searchDetail}) => {
                 <div className="transform transition duration-500 hover:scale-105 bg-white border border-gray-200 rounded-lg shadow " >
                     <img className="object-cover h-64 w-full " alt={search.item_name} src={img1}></img>
                     <div className="p-5">
-                    <h2>{searchName}</h2>
+                    <h2 className="font-apercu">{searchName}</h2>
                     </div>
                 </div>
             </Link>           
