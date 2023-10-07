@@ -130,15 +130,11 @@ const ebayItemCount = ebayInfo?.findItemsByKeywordsResponse?.searchResult?.count
 
 const ebayTitle = ebayInfo?.findItemsByKeywordsResponse?.searchResult?.item
 
+const ebayObj = Array.isArray(ebayTitle)
+ console.log(ebayObj)
 
+const ebayItems = Array.isArray(ebayTitle) ? ebayTitle?.map((ebayItem)=> {
 
-const ebayItems = ebayTitle?.map((ebayItem)=> {
-
-        function addZeroes(num) {
-          const dec = num.split('.')[1]
-          const len = dec && dec.length > 2 ? dec.length : 2
-          return Number(num).toFixed(len)
-        }
 
         return (
           <div key={ebayItem?.title} className="max-w-full flex">
@@ -160,7 +156,7 @@ const ebayItems = ebayTitle?.map((ebayItem)=> {
                 <div className="flex items-center">
                   
                   <div className="">
-                    <span className="inline-block bg-glossier-pink rounded-full px-3 py-1 text-xs lg: text-sm font-semibold text-gray-700 mr-2 mb-2">${addZeroes(ebayItem?.sellingStatus?.currentPrice)}</span>
+                    <span className="inline-block bg-glossier-pink rounded-full px-3 py-1 text-xs lg: text-sm font-semibold text-gray-700 mr-2 mb-2">${ebayItem?.sellingStatus?.currentPrice+`0`}</span>
                   </div>
                 </div>
               </div>
@@ -169,7 +165,35 @@ const ebayItems = ebayTitle?.map((ebayItem)=> {
      
         )
       })
+:
 
+    <div key={ebayTitle?.title} className="max-w-full flex">
+
+        <img className="border-l border-b border-t border-gray-400 
+                        h-30 md:h:36 lg:h-50  xl:h-50
+                        flex-none 
+                        bg-cover 
+                        rounded-l  
+                        text-center 
+                        overflow-hidden" src={ebayTitle?.galleryURL}></img>
+
+      <div className="border-r border-b border-l border-gray-400 border-l-0 border-t border-gray-400 bg-white rounded-b rounded-b-none rounded-r p-4 flex flex-col justify-between leading-normal">
+        <div className="mb-8">
+
+          <div className="text-gray-900 font-bold text-xs lg:text-base xl:text-base mb-2">{ebayTitle?.title}</div>
+            <p className="text-xs lg:text-base text-gray-700 "><a className="underline text-red-200 hover:text-red-300 visited:text-red-400" href={ebayTitle?.viewItemURL} target="_blank" rel="noreferrer">View Listing</a></p>
+          </div>
+          <div className="flex items-center">
+            
+            <div className="">
+              <span className="inline-block bg-glossier-pink rounded-full px-3 py-1 text-xs lg: text-sm font-semibold text-gray-700 mr-2 mb-2">${ebayTitle?.sellingStatus?.currentPrice+`0`}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+  
 
 let renderCollectionId = showListWishlist?.filter(type => type.list_type.includes(`${valList}`))
 
